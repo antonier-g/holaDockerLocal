@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: demo-aer-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: demo-app-aer-pods
+  template:
+    metadata:
+      labels:
+        app: demo-app-aer-pods
+    spec:
+      containers:
+        - name: demo-aer-container
+          image: hola-docker-local-image:v3
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 9999
