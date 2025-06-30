@@ -7,9 +7,9 @@ pipeline {
   }
 
   environment {
-    APP_NAME = "mi-app-spring"
-    JAR_FILE = "target/mi-app-spring.jar"
-    PORT = "8080"
+    APP_NAME = "mi-app-aer-spring"
+    JAR_FILE = "target/mi-app-aer-spring.jar"
+    PORT = "9999"
     PID_FILE = "app.pid"
   }
 
@@ -59,7 +59,7 @@ pipeline {
         // Espera unos segundos para que arranque
         bat 'ping 127.0.0.1 -n 10 > nul'
         // Prueba la app
-        bat 'curl -I http://localhost:8080'
+        bat 'curl -I http://localhost:9999'
       }
     }
   }
