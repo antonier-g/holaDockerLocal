@@ -7,8 +7,8 @@ pipeline {
   }
 
   environment {
-    APP_NAME = "mi-app-aer-spring"
-    JAR_FILE = "target/mi-app-aer-spring.jar"
+    APP_NAME = "holaDockerLocal-0.0.1-SNAPSHOT"
+    JAR_FILE = "target/holaDockerLocal-0.0.1-SNAPSHOT.jar"
     PORT = "9999"
     PID_FILE = "app.pid"
   }
