@@ -11,6 +11,7 @@ pipeline {
     JAR_FILE = "target/holaDockerLocal-0.0.1-SNAPSHOT.jar"
     PORT = "9999"
     PID_FILE = "app.pid"
+    WINDOW_TITLE = "MySpringBootApp"
   }
 
   stages {
@@ -29,7 +30,6 @@ pipeline {
     stage('Stop Previous') {
       steps {
         script {
-          // Si existe un archivo de PID, mata SOLO ese proceso
           bat '''
           if exist app.pid (
             for /f %%i in (app.pid) do taskkill /F /PID %%i
@@ -45,10 +45,9 @@ pipeline {
     stage('Deploy') {
       steps {
         script {
-          // Lanza la app en background y guarda el PID
           bat '''
-          start /B java -jar target/mi-app-spring.jar > app.log 2>&1
-          for /f "tokens=2" %%i in ('tasklist /FI "IMAGENAME eq java.exe" /NH') do echo %%i > app.pid
+          start "MySpringBootApp" /B java -jar target/holaDockerLocal-0.0.1-SNAPSHOT.jar > app.log 2>&1
+          for /f "skip=3 tokens=2" %%i in ('tasklist /FI "WINDOWTITLE eq MySpringBootApp"') do echo %%i > app.pid
           '''
         }
       }
@@ -56,9 +55,7 @@ pipeline {
 
     stage('Test Deployment') {
       steps {
-        // Espera unos segundos para que arranque
         bat 'ping 127.0.0.1 -n 10 > nul'
-        // Prueba la app
         bat 'curl -I http://localhost:9999'
       }
     }
