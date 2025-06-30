@@ -30,7 +30,6 @@ pipeline {
         script {
           // Si ya se está ejecutando, detenerlo primero
           bat 'taskkill /F /IM java.exe || echo No java process running'
-
           // Ejecutar la app en background (Windows)
           bat "start java -jar ${JAR_FILE}"
         }
