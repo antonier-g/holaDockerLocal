@@ -7,10 +7,6 @@ pipeline {
         jdk 'jdk-17'
     }
 
-    environment {
-        // Variables de entorno opcionales
-    }
-
     stages {
         stage('Clonar repositorio') {
             steps {
