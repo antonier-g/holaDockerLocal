@@ -15,19 +15,19 @@ pipeline {
         stage('Clonar repositorio') {
             steps {
                 // Cambia la URL a tu repo real
-                git branch: 'main', url: 'https://github.com/antonier-g/holaDockerLocal.git'
+                git branch: 'master', url: 'https://github.com/antonier-g/holaDockerLocal.git'
             }
         }
 
         stage('Compilar con Maven') {
             steps {
-                sh 'mvn clean install'
+                bat 'mvn clean install'
             }
         }
 
         stage('Pruebas') {
             steps {
-                sh 'mvn test'
+                bat 'mvn test'
             }
         }
 
